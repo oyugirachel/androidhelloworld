@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Enter username"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/username/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter username/email"
+        android:inputType="textPersonName"
+        android:text="Username/Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="57dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        android:ems="10"
+        android:hint="Enter your password"
+        android:inputType="textPersonName"
+        android:text="Enter Your Password"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="login"
+        android:text="LOG IN"
+        android:textColorHighlight="#4CAF50"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="227dp" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="165dp"
+        android:layout_height="45dp"
+        android:text="Forgot Password?"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="356dp" />
+
+    <TextView
+        android:id="@+id/Register Here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:text="Register Here"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:layout_editor_absoluteX="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
