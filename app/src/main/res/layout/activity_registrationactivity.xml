@@ -7,23 +7,9 @@
     tools:context=".Registrationactivity">
 
     <EditText
-        android:id="@+id/First  Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter first name"
-        android:inputType="textPersonName"
-        android:text="Enter First Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="58dp" />
-
-    <EditText
         android:id="@+id/Last Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
@@ -31,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/First  Name" />
+        tools:layout_editor_absoluteY="107dp" />
 
     <EditText
         android:id="@+id/username@gmail.com"
@@ -81,13 +67,29 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="385dp" />
 
-    <Button
-        android:id="@+id/Signup/register"
+    <EditText
+        android:id="@+id/etFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:hint="signup/register"
-        android:text="SIGN UP /REGISTER"
-        app:layout_constraintTop_toTopOf="@+id/etPassword"
-        tools:layout_editor_absoluteX="142dp" />
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Enter your first name"
+        android:inputType="textPersonName"
+        android:text="Enter first name"
+        app:layout_constraintBottom_toTopOf="@+id/Last Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:hint="Signup"
+        android:text="SIGNUP/REGISTER"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

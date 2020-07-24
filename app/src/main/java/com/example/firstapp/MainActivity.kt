@@ -8,6 +8,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tvHello.text="CodeHive2020"
+
+        tvRegister.setOnClickListener{
+            val intent=Intent(baseContext,RegistrationActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
