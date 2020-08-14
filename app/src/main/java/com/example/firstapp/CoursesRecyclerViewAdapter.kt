@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.row_course_item.view.*
 
 
-class CoursesRecyclerViewAdapter(val courgitseList: List<Course>
+class CoursesRecyclerViewAdapter(val courseList: List<Course>
 ) :
     RecyclerView.Adapter<CoursesRecyclerViewAdapter.CoursesViewHolder>() {
 
