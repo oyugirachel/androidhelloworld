@@ -1,5 +1,6 @@
 package com.example.firstapp
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,24 +22,49 @@ class Registrationactivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrationactivity)
         tvRegister.setOnClickListener {
-            var FirstName = etFirstName.text.toString()
-            var Password = etPassword.text.toString()
-            var LastName = etLastName.text.toString()
+            var firstName = etFirstName.text.toString()
+            var password = etPassword.text.toString()
+            var lastName = etLastName.text.toString()
             var email = etEmail.text.toString()
-            var PhoneNumber = etPhoneNumber.text.toString()
-            var ConfirmPassword = etPassword.text.toString()
+            var phoneNumber = etPhoneNumber.text.toString()
+            var confirmPassword = etPassword.text.toString()
+
+            if(firstName.isBlank() || firstName.isEmpty()){
+                etFirstName.error="First Name is required"
+            }
+            if(lastName.isBlank() || lastName.isEmpty()){
+                etLastName.error="Last Name is required"
+            }
+            if(email.isBlank() || email.isEmpty()){
+                etEmail.error="Email is required"
+            }
+            if(phoneNumber.isBlank() || phoneNumber.isEmpty()){
+                etPhoneNumber.error="Phone Number is required"
+            }
+            if(password.isBlank() || password.isEmpty()){
+                etPassword.error="Password is required"
+            }
+            if(confirmPassword.isBlank() || confirmPassword.isEmpty()){
+                etPassword.error="Confirm your password"
+            }
+            progressBar.max=1000
+            val currentProgress=600
+            ObjectAnimator.ofInt(progressBar,"progress",currentProgress)
+                .setDuration(20000)
+                .start()
+
 
             var requestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("first_name", FirstName)
-                .addFormDataPart("last_name", LastName)
+                .addFormDataPart("first_name", firstName)
+                .addFormDataPart("last_name", lastName)
                 .addFormDataPart("email", email)
-                .addFormDataPart("phone_number", PhoneNumber)
-                .addFormDataPart("password", Password)
+                .addFormDataPart("phone_number", phoneNumber)
+                .addFormDataPart("password", password)
                 .build()
 
             //registerUser(requestBody)
-            Toast.makeText(baseContext, Password, Toast.LENGTH_LONG).show()
+            Toast.makeText(baseContext, password, Toast.LENGTH_LONG).show()
 
 
         }
