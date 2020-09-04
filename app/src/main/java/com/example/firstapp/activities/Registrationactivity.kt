@@ -1,10 +1,14 @@
-package com.example.firstapp
+package com.example.firstapp.activities
 
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.firstapp.R
+import com.example.firstapp.api.ApiClient
+import com.example.firstapp.api.ApiInterface
+import com.example.firstapp.models.RegistrationResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.etPassword
 import kotlinx.android.synthetic.main.activity_main.tvRegister
@@ -29,6 +33,8 @@ class Registrationactivity : AppCompatActivity() {
             var phoneNumber = etPhoneNumber.text.toString()
             var confirmPassword = etPassword.text.toString()
 
+            var error=false
+
             if(firstName.isBlank() || firstName.isEmpty()){
                 etFirstName.error="First Name is required"
             }
@@ -47,9 +53,9 @@ class Registrationactivity : AppCompatActivity() {
             if(confirmPassword.isBlank() || confirmPassword.isEmpty()){
                 etPassword.error="Confirm your password"
             }
-            progressBar.max=1000
+            pbLogin.max=1000
             val currentProgress=600
-            ObjectAnimator.ofInt(progressBar,"progress",currentProgress)
+            ObjectAnimator.ofInt(pbLogin,"progress",currentProgress)
                 .setDuration(20000)
                 .start()
 
@@ -62,38 +68,42 @@ class Registrationactivity : AppCompatActivity() {
                 .addFormDataPart("phone_number", phoneNumber)
                 .addFormDataPart("password", password)
                 .build()
+            if(!error){
+                registerUser(requestBody)
+            }
 
             //registerUser(requestBody)
             Toast.makeText(baseContext, password, Toast.LENGTH_LONG).show()
 
 
         }
-        fun registerUser(requestBody: RequestBody) {
-            var apiClient = ApiClient.buildService(ApiInterface::class.java)
-            var registrationCall = apiClient.registerStudent(requestBody)
-            registrationCall.enqueue(object : Callback<RegistrationResponse> {
-                override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
-                    Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
-                }
 
-                override fun onResponse(
-                    call: Call<RegistrationResponse>,
-                    response: Response<RegistrationResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG)
-                            .show()
-                        startActivity(Intent(baseContext, MainActivity::class.java))
-                    } else {
-                        Toast.makeText(
-                            baseContext,
-                            response.errorBody().toString(),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+    }
+    fun registerUser(requestBody: RequestBody) {
+        var apiClient = ApiClient.buildService(ApiInterface::class.java)
+        var registrationCall = apiClient.registerStudent(requestBody)
+        registrationCall.enqueue(object : Callback<RegistrationResponse> {
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<RegistrationResponse>,
+                response: Response<RegistrationResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG)
+                        .show()
+                    startActivity(Intent(baseContext, MainActivity::class.java))
+                } else {
+                    Toast.makeText(
+                        baseContext,
+                        response.errorBody().toString(),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
-            })
-        }
+            }
+        })
     }
 }

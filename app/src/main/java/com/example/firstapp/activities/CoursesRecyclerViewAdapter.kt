@@ -1,19 +1,23 @@
-package com.example.firstapp
+package com.example.firstapp.activities
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.firstapp.R
+import com.example.firstapp.models.Course
 import kotlinx.android.synthetic.main.row_course_item.view.*
 
 
-class CoursesRecyclerViewAdapter(val courseList: List<Course>
+class CoursesRecyclerViewAdapter(val courseList: List<Course>, var courseItemClickListener: CourseItemClickListener
 ) :
     RecyclerView.Adapter<CoursesRecyclerViewAdapter.CoursesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_course_item, parent, false)
-        return CoursesViewHolder(itemView)
+        return CoursesViewHolder(
+            itemView
+        )
     }
 
     override fun getItemCount(): Int {
@@ -27,6 +31,9 @@ class CoursesRecyclerViewAdapter(val courseList: List<Course>
         holder.rowView.tvCourseName.text = courseList[position].courseName
         holder.rowView.tvDescription.text = courseList[position].description
         holder.rowView.tvInstructor.text = courseList[position].instructor
+        holder.rowView.btnRegisterCourse.setOnClickListener {
+            courseItemClickListener.onItemClick(courseList[position])
+        }
 
     }
 
