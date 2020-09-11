@@ -1,6 +1,5 @@
 package com.example.firstapp.activities
 
-import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -14,12 +13,11 @@ import com.example.firstapp.database.HelloDatabase
 import com.example.firstapp.models.Course
 import com.example.firstapp.models.CoursesResponse
 import kotlinx.android.synthetic.main.activity_course.*
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.room.RoomDatabase
-import androidx.room.Database
+import com.example.firstapp.models.RegisterCourse
+import okhttp3.MultipartBody
 
 
 class CourseActivity : AppCompatActivity(), CourseItemClickListener {
@@ -81,5 +79,44 @@ class CourseActivity : AppCompatActivity(), CourseItemClickListener {
         //obtain student id from shared preferences
         //courseId = course.courseId
         //make a post request https://github.com/owuor91/registration-api
+
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
+        val accessToken = sharedPreferences.getString("ACCESS_TOKEN_KEY", "")
+        val studentId = sharedPreferences.getString("STUDENT_ID_KEY", "")
+        var courseId = course.courseId
+
+        var requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("course_id", courseId)
+            .addFormDataPart("student_id", studentId!!)
+            .build()
+
+
+        val apiClient = ApiClient.buildService(ApiInterface::class.java)
+        val coursesCall = apiClient.registerCourse(requestBody,"Bearer $accessToken")
+
+
+        coursesCall.enqueue(object : Callback<RegisterCourse> {
+            override fun onFailure(call: Call<RegisterCourse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResponse(
+                call: Call<RegisterCourse>,
+                response: Response<RegisterCourse>
+            ) {
+                if(response.isSuccessful){
+                    Toast.makeText(this@CourseActivity, "Registered", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        })
+
     }
+
+
+
+
 }

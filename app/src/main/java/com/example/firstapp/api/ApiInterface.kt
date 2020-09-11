@@ -1,5 +1,6 @@
 package com.example.firstapp.api
 
+import com.example.firstapp.models.RegisterCourse
 import com.example.firstapp.models.CoursesResponse
 import com.example.firstapp.models.RegistrationResponse
 import okhttp3.RequestBody
@@ -17,6 +18,12 @@ interface ApiInterface {
 
     @GET("courses")
     fun getCourses(@Header("Authorization") accessToken: String): Call<CoursesResponse>
+
+    @POST("register-course")
+    fun registerCourse(
+        @Body requestBody: RequestBody,
+        @Header("Authorization") accessToken: String
+    ): Call<RegisterCourse>
 }
 
 
